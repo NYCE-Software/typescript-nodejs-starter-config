@@ -10,12 +10,11 @@ Common configuration files used across projects
 >
 > We serve multiple configuration files in this package so prefixing it with `eslint-config-` would be confusing. The ESlint configuration can be imported by using an absolute path.
 
-````json
+```json
 {
-  "prettier": "@nyce/config/prettier",
-  "eslintConfig": {
-    "extends": "./node_modules/@nyce/config/eslint"
-  }
+    "prettier": "@nyce/config/prettier",
+    "eslintConfig": {
+        "extends": "./node_modules/@nyce/config/eslint"
+    }
 }
 ```
-````
