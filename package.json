@@ -1,6 +1,6 @@
 {
     "name": "@nyce/config",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "Common configuration files used across projects.",
     "main": "index.js",
     "files": [
