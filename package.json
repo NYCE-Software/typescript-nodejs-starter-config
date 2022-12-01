@@ -1,0 +1,37 @@
+{
+    "name": "@nyce/config",
+    "version": "0.0.0",
+    "description": "Common configuration files used across projects.",
+    "main": "index.js",
+    "files": [
+        "prettier.js",
+        "eslint.js"
+    ],
+    "scripts": {
+        "format": "prettier -w .",
+        "version": "pnpm run format && git add -A .",
+        "postversion": "git push && git push --tags"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/NYCE-Software/config.git"
+    },
+    "keywords": [
+        "nyce",
+        "software",
+        "nyce-software",
+        "nycesoftware",
+        "config",
+        "configuration"
+    ],
+    "prettier": "./prettier",
+    "author": "NYCE Software",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/NYCE-Software/config/issues"
+    },
+    "homepage": "https://github.com/NYCE-Software/config#readme",
+    "dependencies": {
+        "prettier": "^2.8.0"
+    }
+}

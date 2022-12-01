@@ -1,0 +1,21 @@
+{
+    "$schema": "https://json.schemastore.org/swcrc",
+    "sourceMaps": true,
+    "jsc": {
+        "parser": {
+            "syntax": "typescript",
+            "dynamicImport": true,
+            "topLevelAwait": true
+        },
+        "target": "es2022",
+        "paths": {
+            "@src/*": ["./dist/*"],
+            "@lib/*": ["./dist/lib/*"],
+            "@controllers/*": ["./dist/controllers/*"]
+        }
+    },
+    "module": {
+        "type": "es6",
+        "strict": "true"
+    }
+}
