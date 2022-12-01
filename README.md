@@ -17,5 +17,4 @@ Common configuration files used across projects
     "extends": "./node_modules/@nyce/config/eslint"
   }
 }
-```software
-````
+```
