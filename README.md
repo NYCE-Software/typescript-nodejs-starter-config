@@ -10,7 +10,7 @@ Create a file in your project root called `tsconfig.json` and extend from the NY
 
 ```json
 {
-  "extends": "./node_modules/@nyce/config/tsconfig.json",
+  "extends": "@nyce/config/tsconfig.json",
   "compilerOptions": {
     "baseUrl": "src",
   },
