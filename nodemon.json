@@ -1,0 +1,11 @@
+{
+  "watch": [
+    "src"
+  ],
+  "ignore": [
+    "node_modules",
+    ".git"
+  ],
+  "ext": "ts",
+  "exec": "pnpm format && pnpm lint & pnpm build && pnpm start"
+}

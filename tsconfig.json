@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Node 16 + ESM + Strictest + NYCE adjustments",
+  "compilerOptions": {
+    "sourceMap": true,
+    "baseUrl": "src",
+    "paths": {
+      "@src/*": ["./*"],
+      "@lib/*": ["./lib/*"],
+      "@controllers/*": ["./controllers/*"]
+    },
+    "outDir": "dist",
+    "types": ["node"],
+    "lib": ["es2021"],
+    "target": "es2022",
+    "module": "es2022",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "importsNotUsedAsValues": "error",
+    "allowJs": false,
+    "resolveJsonModule": true
+  },
+  "include": ["src"],
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  }
+}
