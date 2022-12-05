@@ -37,7 +37,7 @@
         "config",
         "configuration"
     ],
-    "prettier": "./prettier",
+    "prettier": "./prettier.cjs",
     "eslintConfig": {
         "extends": "./eslint.cjs"
     },
