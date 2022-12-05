@@ -1,8 +1,22 @@
-# config
+# @nyce/config
 
 Common configuration files used across projects.
 
 ## Usage
+
+### TSconfig
+
+Create a file in your project root called `tsconfig.json` and extend from the NYCE config.
+
+```json
+{
+  "extends": "./node_modules/@nyce/config/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "src",
+  },
+  "include": ["src"]
+}
+```
 
 ### SWC compiler
 
