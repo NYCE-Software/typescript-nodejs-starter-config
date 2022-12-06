@@ -2,7 +2,7 @@
 
 https://www.npmjs.com/package/@nyce/config
 
-Common and very opiniated configuration files for use across various projects. Import only what you need, extend to fill any gaps and keep some of that valueable time to focus on your code.
+Common and very opinionated configuration files for use across various projects. Import only what you need, extend to fill any gaps and keep some of that valuable time to focus on your code.
 
 If you prefer a vanilla JavaScript/TypeScript experience, this probably isn't for you.
 
@@ -11,6 +11,28 @@ If you prefer a vanilla JavaScript/TypeScript experience, this probably isn't fo
 ```bash
 npm install @nyce/config
 ```
+
+## Requirements
+
+The configuration files assume the following is enabled:
+- [ECMAScript modules](https://nodejs.org/api/esm.html#modules-ecmascript-modules); and 
+- The TC39 proposal ['Top-level await'](https://github.com/tc39/proposal-top-level-await);
+
+Add the following entry to (the top of) your `package.json` file to use the Ecmascript Module Loader on your project files:
+
+```json
+{
+  "type": "module"
+}
+```
+
+**Optional but recommended:** Run NodeJS with the `--experimental-specifier-resolution=node` flag for`imports` without specific file extensions:
+
+```bash
+node --experimental-specifier-resolution=node dist/<YOUR-FILE-NAME-HERE>.js
+```
+
+Make sure to replace `<YOUR-FILE-NAME-HERE>.js` with the file you want to run.
 
 ## Usage
 
@@ -22,7 +44,7 @@ Create a file in your project root called `tsconfig.json` and extend from the NY
 {
   "extends": "@nyce/config/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": "src"
   },
   "include": ["src"]
 }
@@ -33,11 +55,29 @@ Create a file in your project root called `tsconfig.json` and extend from the NY
 > Unlike TSC, SWC doesn't support config extension yet. For now, you can load the config file with an absolute path to `node_modules`. 
 >> Alternatively you could (automatically) copy the file over to your project.
 
-Run SWC with the --config-file parameter:
+Run SWC with the `--config-file` parameter:
 
 ```bash
 npx swc --config-file node_modules/@nyce/config/.swcrc
 ```
+
+NPM `build` script:
+
+```json
+{
+  "build": "npx swc --config-file node_modules/@nyce/config/.swcrc ./src -d dist"
+}
+```
+
+NPM `start` script:
+
+```json
+{
+  "start": "node --experimental-specifier-resolution=node dist/<YOUR-FILE-NAME-HERE>.js"
+}
+```
+
+Make sure to replace `<YOUR-FILE-NAME-HERE>.js` with the file you want to run.
 
 ### jest
 
@@ -58,6 +98,13 @@ export default async (): Promise<Config.InitialOptions> => {
 };
 ```
 
+NPM `test` script:
+```json
+{
+  "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --coverage"
+}
+```
+
 ### Prettier and ESlint (package.json)
 
 > [ESLINT forces you to use a prefix on your WHOLE DAMN NPM PACKAGE](https://eslint.org/docs/latest/developer-guide/shareable-configs#npm-scoped-modules) (seriously?!).
@@ -71,4 +118,31 @@ export default async (): Promise<Config.InitialOptions> => {
         "extends": "./node_modules/@nyce/config/eslint"
     }
 }
+
 ```
+
+NPM `lint` and `format` scripts:
+
+```json
+{
+  "lint": "eslint './src/**/*.ts' --ext .ts",
+  "lint:fix": "eslint './src/**/*.ts' --ext .ts --fix",
+  "format": "prettier --loglevel=warn --write src"
+}
+```
+### Nodemon (package.json)
+
+Run Nodemon with a `--config` parameter pointing to this package's `nodemon.json` file and specify a file to watch:
+
+```
+npx nodemon --config node_modules/@nyce/config/nodemon.json src/index.ts
+```
+NPM `watch` script:
+
+```json
+{
+  "watch": "npx nodemon --config node_modules/@nyce/config/nodemon.json src/<YOUR-FILE-NAME-HERE>.ts"
+}
+```
+
+Make sure to replace `<YOUR-FILE-NAME-HERE>.ts` with the file you want to watch.
