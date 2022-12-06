@@ -32,7 +32,7 @@ Add the following entry to (the top of) your `package.json` file to use the Ecma
 node --experimental-specifier-resolution=node dist/<YOUR-FILE-NAME-HERE>.js
 ```
 
-Make sure to replace `<YOUR-FILE-NAME-HERE>.js` with the file you want to run.
+*Make sure to replace `<YOUR-FILE-NAME-HERE>.js` with the file you want to run.*
 
 ## Usage
 
@@ -61,7 +61,7 @@ Run SWC with the `--config-file` parameter:
 npx swc --config-file node_modules/@nyce/config/.swcrc
 ```
 
-NPM `build` script:
+#### NPM `build` script:
 
 ```json
 {
@@ -69,7 +69,7 @@ NPM `build` script:
 }
 ```
 
-NPM `start` script:
+#### NPM `start` script:
 
 ```json
 {
@@ -77,7 +77,7 @@ NPM `start` script:
 }
 ```
 
-Make sure to replace `<YOUR-FILE-NAME-HERE>.js` with the file you want to run.
+*Make sure to replace `<YOUR-FILE-NAME-HERE>.js` with the file you want to run.*
 
 ### jest
 
@@ -98,7 +98,7 @@ export default async (): Promise<Config.InitialOptions> => {
 };
 ```
 
-NPM `test` script:
+#### NPM `test` script:
 ```json
 {
   "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --coverage"
@@ -121,7 +121,7 @@ NPM `test` script:
 
 ```
 
-NPM `lint` and `format` scripts:
+#### NPM `lint` and `format` scripts:
 
 ```json
 {
@@ -134,10 +134,13 @@ NPM `lint` and `format` scripts:
 
 Run Nodemon with a `--config` parameter pointing to this package's `nodemon.json` file and specify a file to watch:
 
+```bash
+npx nodemon --config node_modules/@nyce/config/nodemon.json src/<YOUR-FILE-NAME-HERE>.ts"
 ```
-npx nodemon --config node_modules/@nyce/config/nodemon.json src/index.ts
-```
-NPM `watch` script:
+
+*Make sure to replace `<YOUR-FILE-NAME-HERE>.ts` with the file you want to watch.*
+
+#### NPM `watch` script:
 
 ```json
 {
@@ -145,4 +148,4 @@ NPM `watch` script:
 }
 ```
 
-Make sure to replace `<YOUR-FILE-NAME-HERE>.ts` with the file you want to watch.
+*Make sure to replace `<YOUR-FILE-NAME-HERE>.ts` with the file you want to watch.*
