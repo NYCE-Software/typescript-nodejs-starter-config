@@ -132,7 +132,7 @@ export default async (): Promise<Config.InitialOptions> => {
 ```
 ### Nodemon (package.json)
 
-Run Nodemon with a `--config` parameter pointing to this package's `nodemon.json` file and specify a file to watch:
+Run Nodemon with a `--config` parameter pointing to this packages' `nodemon.json` file and specify a file to watch:
 
 ```bash
 npx nodemon --config node_modules/@nyce/config/nodemon.json src/<YOUR-FILE-NAME-HERE>.ts"
