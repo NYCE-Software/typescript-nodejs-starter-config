@@ -4,7 +4,7 @@ https://www.npmjs.com/package/@nyce/config
 
 Common and very opiniated configuration files for use across various projects. Import only what you need, extend to fill any gaps and keep some of that valueable time to focus on your code.
 
-I you prefer a very vanilla JavaScript/TypeScript experience, this probably isn't for you.
+If you prefer a vanilla JavaScript/TypeScript experience, this probably isn't for you.
 
 ## Installation
 
