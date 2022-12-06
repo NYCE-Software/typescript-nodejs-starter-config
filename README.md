@@ -2,7 +2,7 @@
 
 https://www.npmjs.com/package/@nyce/config
 
-Common configuration files used across projects.
+Common configuration files for useage across various projects. Import what you need, extend to fill any gaps and keep some of that valueable time to focus on your code.
 
 ## Installation
 
