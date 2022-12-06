@@ -1,6 +1,12 @@
 # @nyce/config
 
+https://www.npmjs.com/package/@nyce/config
+
 Common configuration files used across projects.
+
+## Installation
+
+npm install @nyce/config
 
 ## Usage
 
