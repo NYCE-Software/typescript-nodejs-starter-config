@@ -6,7 +6,9 @@ Common configuration files used across projects.
 
 ## Installation
 
+```bash
 npm install @nyce/config
+```
 
 ## Usage
 
