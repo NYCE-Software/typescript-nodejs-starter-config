@@ -32,6 +32,7 @@ module.exports = {
         node: true, // Enable Node.js global variables
     },
     rules: {
+        "curly": "error",
         // no-dob rule has a bug which crashes on loops, turned off.
         "pii/no-dob": "off",
         // Debugging
