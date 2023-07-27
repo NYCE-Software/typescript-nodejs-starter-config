@@ -1,13 +1,13 @@
 module.exports = {
     preset: "ts-jest/presets/default-esm",
     transform: {
-        '^.+\\.tsx?$': {
+        "^.+\\.tsx?$": {
             "ts-jest": {
                 useESM: true,
             },
-        }
+        },
     },
     testEnvironment: "node",
     verbose: true,
-    testPathIgnorePatterns: ["<rootDir>/dist/"]
+    testPathIgnorePatterns: ["<rootDir>/dist/"],
 };

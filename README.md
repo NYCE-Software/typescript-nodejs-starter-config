@@ -15,14 +15,15 @@ npm install @nyce/config
 ## Requirements
 
 The configuration files assume the following is enabled:
-- [ECMAScript modules](https://nodejs.org/api/esm.html#modules-ecmascript-modules); and 
-- The TC39 proposal ['Top-level await'](https://github.com/tc39/proposal-top-level-await);
+
+-   [ECMAScript modules](https://nodejs.org/api/esm.html#modules-ecmascript-modules); and
+-   The TC39 proposal ['Top-level await'](https://github.com/tc39/proposal-top-level-await);
 
 Add the following entry to (the top of) your `package.json` file to use the Ecmascript Module Loader on your project files:
 
 ```json
 {
-  "type": "module"
+    "type": "module"
 }
 ```
 
@@ -32,7 +33,7 @@ Add the following entry to (the top of) your `package.json` file to use the Ecma
 node --experimental-specifier-resolution=node dist/<YOUR-FILE-NAME-HERE>.js
 ```
 
-*Make sure to replace `<YOUR-FILE-NAME-HERE>.js` with the file you want to run.*
+_Make sure to replace `<YOUR-FILE-NAME-HERE>.js` with the file you want to run._
 
 ## Usage
 
@@ -42,18 +43,19 @@ Create a file in your project root called `tsconfig.json` and extend from the NY
 
 ```json
 {
-  "extends": "@nyce/config/tsconfig.json",
-  "compilerOptions": {
-    "baseUrl": "src"
-  },
-  "include": ["src"]
+    "extends": "@nyce/config/tsconfig.json",
+    "compilerOptions": {
+        "baseUrl": "src"
+    },
+    "include": ["src"]
 }
 ```
 
 ### SWC compiler
 
-> Unlike TSC, SWC doesn't support config extension yet. For now, you can load the config file with an absolute path to `node_modules`. 
->> Alternatively you could (automatically) copy the file over to your project.
+> Unlike TSC, SWC doesn't support config extension yet. For now, you can load the config file with an absolute path to `node_modules`.
+>
+> > Alternatively you could (automatically) copy the file over to your project.
 
 Run SWC with the `--config-file` parameter:
 
@@ -65,7 +67,7 @@ npx swc --config-file node_modules/@nyce/config/.swcrc
 
 ```json
 {
-  "build": "npx swc --config-file node_modules/@nyce/config/.swcrc ./src -d dist"
+    "build": "npx swc --config-file node_modules/@nyce/config/.swcrc ./src -d dist"
 }
 ```
 
@@ -73,11 +75,11 @@ npx swc --config-file node_modules/@nyce/config/.swcrc
 
 ```json
 {
-  "start": "node --experimental-specifier-resolution=node dist/<YOUR-FILE-NAME-HERE>.js"
+    "start": "node --experimental-specifier-resolution=node dist/<YOUR-FILE-NAME-HERE>.js"
 }
 ```
 
-*Make sure to replace `<YOUR-FILE-NAME-HERE>.js` with the file you want to run.*
+_Make sure to replace `<YOUR-FILE-NAME-HERE>.js` with the file you want to run._
 
 ### jest
 
@@ -99,9 +101,10 @@ export default async (): Promise<Config.InitialOptions> => {
 ```
 
 #### NPM `test` script:
+
 ```json
 {
-  "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --coverage"
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --coverage"
 }
 ```
 
@@ -118,18 +121,18 @@ export default async (): Promise<Config.InitialOptions> => {
         "extends": "./node_modules/@nyce/config/eslint"
     }
 }
-
 ```
 
 #### NPM `lint` and `format` scripts:
 
 ```json
 {
-  "lint": "eslint './src/**/*.ts' --ext .ts",
-  "lint:fix": "eslint './src/**/*.ts' --ext .ts --fix",
-  "format": "prettier --loglevel=warn --write src"
+    "lint": "eslint './src/**/*.ts' --ext .ts",
+    "lint:fix": "eslint './src/**/*.ts' --ext .ts --fix",
+    "format": "prettier --loglevel=warn --write src"
 }
 ```
+
 ### Nodemon (package.json)
 
 Run Nodemon with a `--config` parameter pointing to this packages' `nodemon.json` file and specify a file to watch:
@@ -138,14 +141,14 @@ Run Nodemon with a `--config` parameter pointing to this packages' `nodemon.json
 npx nodemon --config node_modules/@nyce/config/nodemon.json src/<YOUR-FILE-NAME-HERE>.ts"
 ```
 
-*Make sure to replace `<YOUR-FILE-NAME-HERE>.ts` with the file you want to watch.*
+_Make sure to replace `<YOUR-FILE-NAME-HERE>.ts` with the file you want to watch._
 
 #### NPM `watch` script:
 
 ```json
 {
-  "watch": "npx nodemon --config node_modules/@nyce/config/nodemon.json src/<YOUR-FILE-NAME-HERE>.ts"
+    "watch": "npx nodemon --config node_modules/@nyce/config/nodemon.json src/<YOUR-FILE-NAME-HERE>.ts"
 }
 ```
 
-*Make sure to replace `<YOUR-FILE-NAME-HERE>.ts` with the file you want to watch.*
+_Make sure to replace `<YOUR-FILE-NAME-HERE>.ts` with the file you want to watch._
