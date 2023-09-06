@@ -15,7 +15,7 @@
     "types": "dist/index.d.ts",
     "scripts": {
         "start": "echo info: no start script for this package... no worries... this is normal",
-        "build": "npx swc ./src -d dist",
+        "build": "npx swc ./src -d dist --config jsc.baseUrl=/src",
         "prepare": "npm run build && npx tsc --declaration --emitDeclarationOnly",
         "prepublishOnly": "npm run lint",
         "preversion": "npm run lint",
