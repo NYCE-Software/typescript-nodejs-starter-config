@@ -53,14 +53,26 @@ Create a file in your project root called `tsconfig.json` and extend from the NY
 
 ### SWC compiler
 
-> Unlike TSC, SWC doesn't support config extension yet. For now, you can load the config file with an absolute path to `node_modules`.
+> Unlike TSC, SWC doesn't support config extension yet. ~~For now, you can load the config file with an absolute path to `node_modules`~~.
 >
-> > Alternatively you could (automatically) copy the file over to your project.
+> > ~~Alternatively you could (automatically) copy the file over to your project.~~
+> 
+> > **UPDATE:** In latest versions of SWC loading to an absolute NODE_MODULES path breaks the base url.
+> >
+> > ...Updated the section below to provide a working solution until SWC supports extending configuration files.
+>
+> > SHX is now a peerdependency, so make sure to install that with
+> > ```bash ```
 
-Run SWC with the `--config-file` parameter:
+#### Add the following NPM scripts to copy the config post-install
 
-```bash
-npx swc --config-file node_modules/@nyce/config/.swcrc
+> Replace `pnpm` with `npm` in the postinstall script if you use npm instead of pnpm.
+```json
+{
+    "postinstall": "pnpm copy-swc-config",
+    "copy-swc-config": "shx cp node_modules/@nyce/config/.swcrc .swcrc",
+    "build": "npx swc --config-file .swcrc ./src -d dist"
+}
 ```
 
 #### NPM `build` script:
