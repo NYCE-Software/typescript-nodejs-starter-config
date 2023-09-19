@@ -17,6 +17,7 @@ module.exports = {
     },
     extends: [
         "eslint:recommended",
+        "plugin:import/recommended",
         // TypeScript
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
@@ -28,11 +29,18 @@ module.exports = {
         // Optimization
         "plugin:regexp/recommended",
     ],
+    settings: {
+        "import/resolver": {
+            typescript: true,
+            node: true
+        },
+    },
     env: {
         node: true, // Enable Node.js global variables
     },
     rules: {
-        curly: "error",
+        "import/extensions": "always",
+        "curly": "error",
         // no-dob rule has a bug which crashes on loops, turned off.
         "pii/no-dob": "off",
         // Debugging
