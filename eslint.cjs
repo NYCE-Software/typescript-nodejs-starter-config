@@ -9,6 +9,7 @@ module.exports = {
         "xss",
         // Optimization
         "regexp",
+        "require-extensions",
     ],
     parserOptions: {
         ecmaVersion: "latest", // Allows the use of modern ECMAScript features
@@ -17,7 +18,7 @@ module.exports = {
     },
     extends: [
         "eslint:recommended",
-        "plugin:import/recommended",
+        "plugin:require-extensions/recommended",
         // TypeScript
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
@@ -39,7 +40,6 @@ module.exports = {
         node: true, // Enable Node.js global variables
     },
     rules: {
-        "import/extensions": ["error", "always"],
         "curly": "error",
         // no-dob rule has a bug which crashes on loops, turned off.
         "pii/no-dob": "off",
