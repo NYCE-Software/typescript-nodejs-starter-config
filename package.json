@@ -21,7 +21,8 @@
         "preversion": "npm run lint",
         "lint": "eslint './src/**/*.ts' --ext .ts",
         "lint:fix": "eslint './src/**/*.ts' --ext .ts --fix",
-        "format": "prettier --write \"src/**/*.ts\"",
+        "format": "prettier -c .",
+        "format:fix": "prettier -c . -w",
         "version": "npm run format && git add -A src",
         "postversion": "git push && git push --tags"
     },
