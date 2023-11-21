@@ -33,14 +33,14 @@ module.exports = {
     settings: {
         "import/resolver": {
             typescript: true,
-            node: true
+            node: true,
         },
     },
     env: {
         node: true, // Enable Node.js global variables
     },
     rules: {
-        "curly": "error",
+        curly: "error",
         // no-dob rule has a bug which crashes on loops, turned off.
         "pii/no-dob": "off",
         // Debugging

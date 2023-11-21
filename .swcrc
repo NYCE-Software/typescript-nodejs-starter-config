@@ -13,7 +13,7 @@
             "@src/*": ["./*"],
             "@lib/*": ["./lib/*"],
             "@controllers/*": ["./controllers/*"]
-        },
+        }
     },
     "module": {
         "type": "es6"
