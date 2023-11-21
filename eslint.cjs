@@ -46,6 +46,7 @@ module.exports = {
         // Debugging
         "no-console": "warn",
         // Type
+        '@typescript-eslint/consistent-type-imports': 'error',
         "@typescript-eslint/no-inferrable-types": [
             "off",
             {
