@@ -6,7 +6,8 @@
         "parser": {
             "syntax": "typescript",
             "dynamicImport": true,
-            "topLevelAwait": true
+            "topLevelAwait": true,
+            "decorators": true
         },
         "target": "es2022",
         "paths": {
