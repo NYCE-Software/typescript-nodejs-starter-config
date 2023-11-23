@@ -2,6 +2,9 @@
     "name": "@nyce/config",
     "version": "3.3.3",
     "description": "Common configuration files used across projects.",
+    "engines": {
+        "node": ">=20.9"
+    },
     "files": [
         "dist/**/*",
         "prettier.cjs",
@@ -17,7 +20,6 @@
         "start": "echo info: no start script for this package... no worries... this is normal",
         "build": "npx swc ./src -d dist --config jsc.baseUrl=/src",
         "prepare": "npm run build && npx tsc --declaration --emitDeclarationOnly",
-        "prepublishOnly": "npm run lint",
         "preversion": "npm run lint",
         "lint": "eslint './src/**/*.ts' --ext .ts",
         "lint:fix": "eslint './src/**/*.ts' --ext .ts --fix",
