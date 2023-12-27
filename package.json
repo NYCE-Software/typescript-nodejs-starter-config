@@ -1,6 +1,6 @@
 {
     "name": "@nyce/config",
-    "version": "4.0.9",
+    "version": "4.0.10",
     "description": "Common configuration files used across projects.",
     "engines": {
         "node": ">=20.9"
