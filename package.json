@@ -18,8 +18,9 @@
     "types": "dist/index.d.ts",
     "scripts": {
         "start": "echo info: no start script for this package... no worries... this is normal",
+        "check-version-collision": "[ \"$(npm view .@latest version)\" != $npm_package_version ] && exit 0 || echo \"Error: package version '$npm_package_version' already published, please run (p)npm version before merge \" && exit 1",
         "build": "npx swc ./src -d dist --config jsc.baseUrl=/src",
-        "prepare": "pnpm build && pnpm lint && pnpm format && pnpm emitTypeDeclarations",
+        "prepare": "pnpm build && pnpm emitTypeDeclarations",
         "emitTypeDeclarations": "npx tsc --declaration --emitDeclarationOnly",
         "preversion": "pnpm prepare",
         "lint": "eslint './src/**/*.ts' --ext .ts",
@@ -27,6 +28,7 @@
         "format": "prettier -c .",
         "format:fix": "prettier -c . -w",
         "version": "npm run format && git add -A src",
+        "version:dependabot": "git checkout HEAD -- .npmrc && pnpm version patch",
         "postversion": "git push && git push --tags"
     },
     "repository": {
