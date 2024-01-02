@@ -1,9 +1,9 @@
 name: Dependabot auto-merge
 on:
-  workflow_run:
-    workflows: [Build and Version]
-    types:
-      - completed
+    workflow_run:
+        workflows: [Build and Version]
+        types:
+            - completed
 
 permissions:
     contents: write
