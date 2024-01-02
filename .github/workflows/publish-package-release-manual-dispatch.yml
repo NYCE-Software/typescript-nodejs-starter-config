@@ -34,4 +34,4 @@ jobs:
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
             - name: Publish (P)NPM package
-              run: pnpm publish --no-git-checks
+              run: pnpm publish --no-git-checks --otp ${{ inputs.totp }}
