@@ -4,7 +4,7 @@ on:
     workflow_dispatch:
         inputs:
             totp:
-                description: 'TOTP (two-factor authentication) code for NPM'
+                description: "TOTP (two-factor authentication) code for NPM"
                 required: true
                 type: number
 
@@ -24,6 +24,8 @@ jobs:
 
         steps:
             - uses: actions/checkout@v4
+            - name: Set build .npmrc
+              run: cp -f .npmrc.build .npmrc
             - uses: pnpm/action-setup@v2
               with:
                   version: 8
