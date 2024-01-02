@@ -1,6 +1,12 @@
 name: Publish NPM package (manual)
 
-on: workflow_dispatch
+on:
+    workflow_dispatch:
+        inputs:
+            totp:
+                description: 'TOTP (two-factor authentication) code for NPM'
+                required: true
+                type: number
 
 permissions:
     contents: write
