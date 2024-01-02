@@ -18,8 +18,6 @@ jobs:
 
         steps:
             - uses: actions/checkout@v4
-            - name: Set build .npmrc
-              run: cp -f .npmrc.build .npmrc
             - uses: pnpm/action-setup@v2
               with:
                   version: 8
