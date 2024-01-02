@@ -13,7 +13,7 @@ permissions:
     packages: write
 
 env:
-    NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    NPM_TOKEN: ${{ secrets.NPM_PUBLISH }}
 
 jobs:
     publish:
@@ -33,7 +33,9 @@ jobs:
               with:
                   cache: "pnpm"
                   node-version: ${{ matrix.node-version }}
+                  registry-url: "https://registry.npmjs.org"
+                  scope: "@nyce"
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
             - name: Publish (P)NPM package
-              run: pnpm publish --no-git-checks --otp ${{ inputs.totp }}
+              run: pnpm publish --access public --no-git-checks --otp ${{ inputs.totp }}
