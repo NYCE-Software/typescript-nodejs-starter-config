@@ -1,8 +1,9 @@
-name: Build and Version
+name: Build (+ dependabot-only version bump)
 
 on:
-    pull_request:
-        branches: [develop, test, acceptance, main]
+  workflow_call:
+  pull_request:
+    branches: [ develop, test, acceptance, main ]
 
 permissions:
     contents: write
