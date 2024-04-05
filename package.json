@@ -8,6 +8,7 @@
     "files": [
         "dist/**/*",
         "prettier.cjs",
+        "prettier-svelte.cjs",
         "eslint.cjs",
         "jest.cjs",
         ".swcrc",
