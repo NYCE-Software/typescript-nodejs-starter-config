@@ -12,7 +12,7 @@ dependencies:
     specifier: ^29.7.0
     version: 29.7.0(@types/node@20.12.4)
   shx:
-    specifier: ^0.3
+    specifier: ^0.3.0
     version: 0.3.4
 
 devDependencies:
