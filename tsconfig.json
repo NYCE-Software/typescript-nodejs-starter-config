@@ -31,6 +31,7 @@
         "noUnusedParameters": true,
         "verbatimModuleSyntax": true,
         "allowJs": false,
+        "allowImportingTsExtensions": false,
         "resolveJsonModule": true
     },
     "include": ["src"],
