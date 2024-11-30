@@ -16,8 +16,8 @@ npm install @nyce/config
 
 The configuration files assume the following is enabled:
 
--   [ECMAScript modules](https://nodejs.org/api/esm.html#modules-ecmascript-modules); and
--   The TC39 proposal ['Top-level await'](https://github.com/tc39/proposal-top-level-await);
+- [ECMAScript modules](https://nodejs.org/api/esm.html#modules-ecmascript-modules); and
+- The TC39 proposal ['Top-level await'](https://github.com/tc39/proposal-top-level-await);
 
 Add the following entry to (the top of) your `package.json` file to use the Ecmascript Module Loader on your project files:
 
