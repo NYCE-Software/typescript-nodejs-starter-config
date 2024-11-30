@@ -40,12 +40,6 @@ importers:
       eslint-config-prettier:
         specifier: ^9.1.0
         version: 9.1.0(eslint@8.57.0)
-      eslint-plugin-no-secrets:
-        specifier: ^0.9.1
-        version: 0.9.1(eslint@8.57.0)
-      eslint-plugin-no-unsanitized:
-        specifier: ^4.1.2
-        version: 4.1.2(eslint@8.57.0)
       eslint-plugin-pii:
         specifier: ^1.0.2
         version: 1.0.2(eslint@8.57.0)
@@ -947,17 +941,6 @@ packages:
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
-
-  eslint-plugin-no-secrets@0.9.1:
-    resolution: {integrity: sha512-41GIjvJd/jcqKyr7H4F4FpelFh5Kzdpjk34IfzvzftZPCU0VRA9fKmQdLvPsRt9hifhZfBlqX4h4igdCD/SSwQ==}
-    engines: {node: '>=10.0.0', npm: '>=6.9.0'}
-    peerDependencies:
-      eslint: '>=3.0.0'
-
-  eslint-plugin-no-unsanitized@4.1.2:
-    resolution: {integrity: sha512-ydF3PMFKEIkP71ZbLHFvu6/FW8SvRv6VV/gECfrQkqyD5+5oCAtPz8ZHy0GRuMDtNe2jsNdPCQXX4LSbkapAVQ==}
-    peerDependencies:
-      eslint: ^8 || ^9
 
   eslint-plugin-pii@1.0.2:
     resolution: {integrity: sha512-UKOpjAxd2aGDfykeICHi6yceZOQD4KXTX25A/PLq1HCgkFRudRTvGkRzuDYZoI6oLj8TjHsEiHnDxkoapFKX4Q==}
@@ -3109,14 +3092,6 @@ snapshots:
   escape-string-regexp@4.0.0: {}
 
   eslint-config-prettier@9.1.0(eslint@8.57.0):
-    dependencies:
-      eslint: 8.57.0
-
-  eslint-plugin-no-secrets@0.9.1(eslint@8.57.0):
-    dependencies:
-      eslint: 8.57.0
-
-  eslint-plugin-no-unsanitized@4.1.2(eslint@8.57.0):
     dependencies:
       eslint: 8.57.0
 

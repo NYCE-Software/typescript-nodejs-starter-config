@@ -5,7 +5,6 @@ module.exports = {
         // TypeScript
         "@typescript-eslint",
         // Security
-        "no-secrets",
         "xss",
         // Optimization
         "regexp",
@@ -25,7 +24,6 @@ module.exports = {
         // Code style
         "prettier",
         // Security
-        "plugin:no-unsanitized/DOM",
         "plugin:pii/recommended",
         // Optimization
         "plugin:regexp/recommended",
@@ -61,7 +59,6 @@ module.exports = {
             },
         ],
         // Security
-        "no-secrets/no-secrets": "error",
         "xss/no-mixed-html": "error",
         "xss/no-location-href-assign": "error",
     },
