@@ -28,7 +28,7 @@ jobs:
               run: cp -f .npmrc.build .npmrc
             - uses: pnpm/action-setup@v4
               with:
-                  version: 9
+                  version: 10
             - uses: actions/setup-node@v4
               with:
                   cache: "pnpm"
