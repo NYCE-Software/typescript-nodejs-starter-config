@@ -53,20 +53,20 @@
     "devDependencies": {
         "@eslint/js": "^9.20.0",
         "@swc/cli": "^0.6.0",
-        "@swc/core": "^1.10.15",
-        "@types/node": "^22.13.1",
-        "eslint": "^9.20.0",
-        "globals": "^15.14.0",
-        "prettier": "^3.5.0",
+        "@swc/core": "^1.10.17",
+        "@types/node": "^22.13.4",
+        "eslint": "^9.20.1",
+        "globals": "^15.15.0",
+        "prettier": "^3.5.1",
         "ts-jest": "^29.2.5",
         "tsconfig-paths": "^4.2.0",
         "typescript": "^5.7.3",
-        "typescript-eslint": "^8.24.0",
-        "@nyce/eslint-config": "^1.0.1"
+        "typescript-eslint": "^8.24.1",
+        "@nyce/eslint-config": "^1.0.2"
     },
     "peerDependencies": {
         "@types/node": "^22.13",
-        "prettier": "^3.5.0",
+        "prettier": "^3.5.1",
         "shx": "^0.3.0",
         "typescript": "^5.7.0"
     },
