@@ -53,7 +53,7 @@
     "devDependencies": {
         "@eslint/js": "^9.29.0",
         "@swc/cli": "^0.7.7",
-        "@swc/core": "^1.12.5",
+        "@swc/core": "^1.12.6",
         "@types/node": "^24.0.3",
         "eslint": "^9.29.0",
         "globals": "^16.2.0",
@@ -61,8 +61,8 @@
         "ts-jest": "^29.4.0",
         "tsconfig-paths": "^4.2.0",
         "typescript": "^5.8.3",
-        "typescript-eslint": "^8.34.1",
-        "@nyce/eslint-config": "^1.0.2"
+        "typescript-eslint": "^8.35.0",
+        "@nyce/eslint-config": "^1.0.4"
     },
     "peerDependencies": {
         "@types/node": "^22.13",
