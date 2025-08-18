@@ -23,7 +23,7 @@ jobs:
                 node-version: [22.x]
 
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
             - name: Set build .npmrc
               run: cp -f .npmrc.build .npmrc
             - uses: pnpm/action-setup@v4
