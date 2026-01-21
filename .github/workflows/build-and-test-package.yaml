@@ -20,16 +20,17 @@ jobs:
                 # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
         steps:
-            - uses: actions/checkout@v4
-              with:
-                  ref: ${{ github.event.pull_request.head.ref }}
+            - uses: actions/checkout@v6
             - uses: pnpm/action-setup@v4
               with:
-                  version: 10
-            - uses: actions/setup-node@v4
+                package_json_file: app/package.json
+            - uses: actions/setup-node@v6
               with:
-                  cache: "pnpm"
-                  node-version: ${{ matrix.node-version }}
+                node-version: ${{ matrix.node-version }}
+                cache: 'pnpm'
+                cache-dependency-path: ./app/pnpm-lock.yaml
+            - name: Set NPM auth token
+              run: pnpm config set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
             - name: Build (Compile TS)
