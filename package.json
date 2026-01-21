@@ -57,7 +57,7 @@
         "@swc/core": "^1.15.10",
         "@types/node": "^24.10.9",
         "eslint": "^9.39.2",
-        "globals": "^16.5.0",
+        "globals": "^17.0.0",
         "prettier": "^3.8.0",
         "ts-jest": "^29.4.6",
         "tsconfig-paths": "^4.2.0",
