@@ -23,18 +23,18 @@ jobs:
                 node-version: [22.x]
 
         steps:
-            - uses: actions/checkout@v4
-            - name: Set build .npmrc
-              run: cp -f .npmrc.build .npmrc
+            - uses: actions/checkout@v6
             - uses: pnpm/action-setup@v4
               with:
-                  version: 10
-            - uses: actions/setup-node@v4
+                  package_json_file: app/package.json
+            - uses: actions/setup-node@v6
               with:
-                  cache: "pnpm"
                   node-version: ${{ matrix.node-version }}
+                  cache: 'pnpm'
                   registry-url: "https://registry.npmjs.org"
                   scope: "@nyce"
+            - name: Set NPM auth token
+              run: pnpm config set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
             - name: Publish (P)NPM package
