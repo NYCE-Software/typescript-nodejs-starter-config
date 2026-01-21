@@ -1,6 +1,6 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
-    "display": "Node 16 + ESM + Strictest + NYCE adjustments",
+    "display": "Node 22 + ESM + NYCE adjustments",
     "compilerOptions": {
         "experimentalDecorators": true,
         "sourceMap": true,
