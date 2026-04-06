@@ -1,20 +1,29 @@
 version: 2
 updates:
-    - package-ecosystem: "github-actions"
-      directory: "/"
-      schedule:
-          # Check for updates to GitHub Actions every week
-          interval: "weekly"
-    - package-ecosystem: "npm" # See documentation for possible values
-      directory: "/" # Location of package manifests
-      versioning-strategy: increase
-      schedule:
-          interval: "daily"
-      groups:
-          minor-and-patch-dependencies:
-              update-types:
-                  - "minor"
-                  - "patch"
-          major-dependencies:
-              update-types:
-                  - "major"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      # Check for updates to GitHub Actions every week
+      interval: "weekly"
+    groups:
+      github-actions-all:
+        update-types:
+          - "major"
+          - "minor"
+          - "patch"
+  - package-ecosystem: "npm" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    versioning-strategy: increase
+    schedule:
+      interval: "daily"
+    ignore:
+      - dependency-name: "@types/node"
+        update-types: [ "version-update:semver-major" ]
+    groups:
+      minor-and-patch-dependencies:
+        update-types:
+          - "minor"
+          - "patch"
+      major-dependencies:
+        update-types:
+          - "major"
