@@ -24,8 +24,6 @@
         "prepare": "pnpm build && pnpm emitTypeDeclarations",
         "emitTypeDeclarations": "npx tsc --declaration --emitDeclarationOnly",
         "preversion": "pnpm prepare",
-        "lint": "eslint './src/**/*.ts'",
-        "lint:fix": "eslint './src/**/*.ts' --fix",
         "format": "prettier -c .",
         "format:fix": "prettier -c . -w",
         "version": "npm run format && git add -A src",
@@ -52,18 +50,14 @@
     },
     "homepage": "https://github.com/NYCE-Software/config#readme",
     "devDependencies": {
-        "@eslint/js": "^10.0.1",
         "@swc/cli": "^0.8.1",
         "@swc/core": "^1.15.24",
         "@types/node": "^24.12",
-        "eslint": "^10.2.0",
         "globals": "^17.4.0",
         "prettier": "^3.8.1",
         "ts-jest": "^29.4.9",
         "tsconfig-paths": "^4.2.0",
         "typescript": "^6.0.2",
-        "typescript-eslint": "^8.58.0",
-        "@nyce/eslint-config": "^1.2.0"
     },
     "peerDependencies": {
         "@types/node": "^24.12",
