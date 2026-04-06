@@ -4,18 +4,17 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "sourceMap": true,
-        "baseUrl": "src",
         "paths": {
-            "@src/*": ["./*"],
-            "@lib/*": ["./lib/*"],
-            "@controllers/*": ["./controllers/*"]
+            "@src/*": ["./src/*"],
+            "@lib/*": ["./src/lib/*"],
+            "@controllers/*": ["./src/controllers/*"]
         },
         "outDir": "dist",
         "types": ["node"],
         "target": "esnext",
         "lib": ["esnext"],
-        "module": "es2022",
-        "moduleResolution": "node",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
@@ -32,7 +31,8 @@
         "verbatimModuleSyntax": true,
         "allowJs": false,
         "allowImportingTsExtensions": false,
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "rootDir": "./src"
     },
     "include": ["src"],
     "ts-node": {
