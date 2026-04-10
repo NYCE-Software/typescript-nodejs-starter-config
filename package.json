@@ -54,7 +54,7 @@
         "@swc/core": "^1.15.24",
         "@types/node": "^24.12",
         "globals": "^17.4.0",
-        "prettier": "^3.8.1",
+        "prettier": "^3.8.2",
         "ts-jest": "^29.4.9",
         "tsconfig-paths": "^4.2.0",
         "typescript": "^6.0.2"
