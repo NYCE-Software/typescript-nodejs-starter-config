@@ -51,16 +51,16 @@
     "homepage": "https://github.com/NYCE-Software/config#readme",
     "devDependencies": {
         "@swc/cli": "^0.8.1",
-        "@swc/core": "^1.15.24",
-        "@types/node": "^24.12",
-        "globals": "^17.4.0",
-        "prettier": "^3.8.1",
-        "ts-jest": "^29.4.9",
+        "@swc/core": "^1.15.43",
+        "@types/node": "^24.13",
+        "globals": "^17.7.0",
+        "prettier": "^3.9.4",
+        "ts-jest": "^29.4.11",
         "tsconfig-paths": "^4.2.0",
         "typescript": "^6.0.2"
     },
     "peerDependencies": {
-        "@types/node": "^24.12",
+        "@types/node": "^24.13",
         "typescript": "^6"
     }
 }
