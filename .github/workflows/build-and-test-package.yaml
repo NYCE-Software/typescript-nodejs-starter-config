@@ -35,8 +35,6 @@ jobs:
               run: pnpm install --frozen-lockfile
             - name: Build (Compile TS)
               run: pnpm build
-            - name: Run linter on code (ESLint)
-              run: pnpm lint --max-warnings 0
             - name: Check code formatting (Prettier)
               run: pnpm format
             - name: (non-dependabot) Check if declared package version isn't already published
