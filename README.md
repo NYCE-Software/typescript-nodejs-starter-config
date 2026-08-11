@@ -6,18 +6,26 @@ Common and very opinionated configuration files for use across various projects.
 
 If you prefer a vanilla JavaScript/TypeScript experience, this probably isn't for you.
 
-## Installation
+## What's in the box
 
-```bash
-npm install @nyce/config
-```
+| File            | Tool       | How you consume it                                        |
+| --------------- | ---------- | --------------------------------------------------------- |
+| `tsconfig.json` | TypeScript | `"extends": "@nyce/config/tsconfig.json"`                 |
+| `.swcrc`        | SWC        | Copied into your project root (SWC can't extend configs)  |
+| `jest.cjs`      | Jest       | `require("@nyce/config/jest.cjs")`                        |
+| `prettier.cjs`  | Prettier   | `"prettier": "@nyce/config/prettier.cjs"`                 |
+| `nodemon.json`  | nodemon    | `nodemon --config node_modules/@nyce/config/nodemon.json` |
+
+> **ESLint moved out.** The ESLint configuration is no longer part of this package — it lives in
+> [@nyce/eslint-config](https://www.npmjs.com/package/@nyce/eslint-config).
 
 ## Requirements
 
-The configuration files assume the following is enabled:
+The configuration files assume the following:
 
+- **Node.js 24 or newer**;
 - [ECMAScript modules](https://nodejs.org/api/esm.html#modules-ecmascript-modules); and
-- The TC39 proposal ['Top-level await'](https://github.com/tc39/proposal-top-level-await);
+- [TypeScript 6](https://www.typescriptlang.org/) with `@types/node` 24 (both are peer dependencies).
 
 Add the following entry to (the top of) your `package.json` file to use the Ecmascript Module Loader on your project files:
 
@@ -27,141 +35,168 @@ Add the following entry to (the top of) your `package.json` file to use the Ecma
 }
 ```
 
-**Optional but recommended:** Run NodeJS with the `--experimental-specifier-resolution=node` flag for`imports` without specific file extensions:
+### Use explicit file extensions
 
-```bash
-node --experimental-specifier-resolution=node dist/<YOUR-FILE-NAME-HERE>.js
+The config uses `"moduleResolution": "nodenext"`, so relative and aliased imports need the emitted `.js` extension — even when the file on disk is a `.ts` file:
+
+```ts
+import { thing } from "./lib/thing.js";
+import { other } from "@lib/other.js";
 ```
 
-_Make sure to replace `<YOUR-FILE-NAME-HERE>.js` with the file you want to run._
+> Older versions of this README recommended running Node with `--experimental-specifier-resolution=node` to skip the extensions. That flag is a no-op on modern Node — extensionless imports still fail with `ERR_MODULE_NOT_FOUND`. Use the extensions.
+
+## Installation
+
+```bash
+pnpm add -D @nyce/config typescript@^6 @types/node@^24.12
+```
 
 ## Usage
 
-### TSconfig
+### TypeScript
 
-Create a file in your project root called `tsconfig.json` and extend from the NYCE config.
+Create a `tsconfig.json` in your project root and extend from the NYCE config:
 
 ```json
 {
     "extends": "@nyce/config/tsconfig.json",
     "compilerOptions": {
-        "baseUrl": "src"
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "types": ["node"],
+        "paths": {
+            "@src/*": ["./src/*"],
+            "@lib/*": ["./src/lib/*"],
+            "@controllers/*": ["./src/controllers/*"]
+        }
     },
     "include": ["src"]
 }
 ```
 
+Those four overrides are not optional — TypeScript resolves relative paths in an inherited config against the file that _declares_ them, which is `node_modules/@nyce/config/tsconfig.json`:
+
+- **`rootDir` / `outDir`** — without them, every one of your files sits outside the inherited `rootDir` and the compiler bails out with `TS6059: File ... is not under 'rootDir'`.
+- **`paths`** — the inherited aliases point at the package's own `src` directory, so `import { x } from "@lib/x.js"` fails with `TS2307: Cannot find module`. Redeclare them and they resolve against your project.
+- **`types`** — the base config sets `"types": ["node"]`, which switches off automatic `@types` discovery. Add anything else you need to the list (see the Jest section).
+
+> **Don't add `baseUrl`.** It is deprecated in TypeScript 6 (`TS5101`) and removed in TypeScript 7 (`TS5102`). Path aliases work through `paths` alone.
+
 ### SWC compiler
 
-> Unlike TSC, SWC doesn't support config extension yet. ~~For now, you can load the config file with an absolute path to `node_modules`~~.
->
-> > ~~Alternatively you could (automatically) copy the file over to your project.~~
->
-> > **UPDATE:** In latest versions of SWC loading to an absolute NODE_MODULES path breaks the base url.
-> >
-> > ...Updated the section below to provide a working solution until SWC supports extending configuration files.
->
-> > SHX is now a peerdependency, so make sure to install that with
-> > `bash `
+SWC still doesn't support extending configuration files, and pointing `--config-file` at the copy inside `node_modules` fails because SWC canonicalizes `baseUrl` relative to the `.swcrc` — you get `failed to canonicalize base url using the path of .swcrc`.
 
-#### Add the following NPM scripts to copy the config post-install
-
-> Replace `pnpm` with `npm` in the postinstall script if you use npm instead of pnpm.
+So copy the file into your project root instead:
 
 ```json
 {
-    "postinstall": "pnpm copy-swc-config",
-    "copy-swc-config": "shx cp node_modules/@nyce/config/.swcrc .swcrc",
-    "build": "npx swc --config-file .swcrc ./src -d dist"
+    "scripts": {
+        "postinstall": "cp node_modules/@nyce/config/.swcrc .swcrc",
+        "build": "swc --strip-leading-paths ./src -d dist"
+    }
 }
 ```
 
-#### NPM `build` script:
+> On Windows, install [shx](https://www.npmjs.com/package/shx) as a devDependency and use `shx cp` instead of `cp`.
+
+`--strip-leading-paths` keeps the output flat (`dist/index.js` rather than `dist/src/index.js`). Path aliases are rewritten to relative specifiers on the way out, so the emitted code runs on plain Node.
+
+#### NPM `start` script
 
 ```json
 {
-    "build": "npx swc --config-file node_modules/@nyce/config/.swcrc ./src -d dist"
-}
-```
-
-#### NPM `start` script:
-
-```json
-{
-    "start": "node --experimental-specifier-resolution=node dist/<YOUR-FILE-NAME-HERE>.js"
+    "start": "node dist/<YOUR-FILE-NAME-HERE>.js"
 }
 ```
 
 _Make sure to replace `<YOUR-FILE-NAME-HERE>.js` with the file you want to run._
 
-### jest
+### Jest
 
-Create a file in your project root called `jest.config.ts` with the following contents:
+Install `jest` and `ts-jest` alongside this package, then create a `jest.config.mjs` in your project root:
 
-```typescript
-import type { Config } from "@jest/types";
+```js
+import { createRequire } from "node:module";
 import { pathsToModuleNameMapper } from "ts-jest";
 
-export default async (): Promise<Config.InitialOptions> => {
-    const { compilerOptions } = await require("@nyce/config/tsconfig.json");
-    const nyceBaseOptions: Config.InitialOptions = await require("@nyce/config/jest.cjs");
+const require = createRequire(import.meta.url);
+const nyceBaseOptions = require("@nyce/config/jest.cjs");
+const { compilerOptions } = require("./tsconfig.json");
 
-    return {
-        ...nyceBaseOptions,
-        moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: "<rootDir>/src/" }) ?? {},
-    };
+export default {
+    ...nyceBaseOptions,
+    moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths ?? {}, {
+        prefix: "<rootDir>/",
+        useESM: true,
+    }),
 };
 ```
 
-#### NPM `test` script:
+The mapper reads the aliases from _your_ `tsconfig.json` (see the TypeScript section), and `useESM: true` teaches it to strip the `.js` extension off imports so Jest finds the `.ts` source.
+
+Add the Jest globals and `isolatedModules` to your `tsconfig.json`:
 
 ```json
 {
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --coverage"
-}
-```
-
-### Prettier and ESlint (package.json)
-
-> [ESLINT forces you to use a prefix on your WHOLE DAMN NPM PACKAGE](https://eslint.org/docs/latest/developer-guide/shareable-configs#npm-scoped-modules) (seriously?!).
->
-> We serve multiple configuration files in this package so prefixing it with `eslint-config-` would be confusing. The ESlint configuration can be imported by using an absolute path.
-
-```json
-{
-    "prettier": "@nyce/config/prettier",
-    "eslintConfig": {
-        "extends": "./node_modules/@nyce/config/eslint"
+    "compilerOptions": {
+        "types": ["node", "jest"],
+        "isolatedModules": true
     }
 }
 ```
 
-#### NPM `lint` and `format` scripts:
+Without `"jest"` in `types` the compiler doesn't know `describe`/`it`/`expect` (`TS2593`); without `isolatedModules` ts-jest warns about the hybrid module kind (`TS151002`).
+
+#### NPM `test` script
 
 ```json
 {
-    "lint": "eslint './src/**/*.ts' --ext .ts",
-    "lint:fix": "eslint './src/**/*.ts' --ext .ts --fix",
-    "format": "prettier --loglevel=warn --write src"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --coverage"
 }
 ```
 
-### Nodemon (package.json)
+> A `jest.config.ts` also works, but Jest needs `ts-node` installed to read it. The `.mjs` variant above avoids that dependency.
 
-Run Nodemon with a `--config` parameter pointing to this packages' `nodemon.json` file and specify a file to watch:
+### Prettier
+
+Point the `prettier` key in your `package.json` at the config:
+
+```json
+{
+    "prettier": "@nyce/config/prettier.cjs"
+}
+```
+
+> Include the `.cjs` extension. `"@nyce/config/prettier"` does not resolve — Node won't guess the extension for a package subpath.
+
+#### NPM `format` scripts
+
+```json
+{
+    "format": "prettier --check .",
+    "format:fix": "prettier --write ."
+}
+```
+
+> `--loglevel` was renamed to `--log-level` in Prettier 3; the old spelling is silently ignored.
+
+### Nodemon
+
+Run nodemon with a `--config` parameter pointing to this package's `nodemon.json` file and specify a file to watch:
 
 ```bash
-npx nodemon --config node_modules/@nyce/config/nodemon.json src/<YOUR-FILE-NAME-HERE>.ts"
+npx nodemon --config node_modules/@nyce/config/nodemon.json src/<YOUR-FILE-NAME-HERE>.ts
 ```
 
 _Make sure to replace `<YOUR-FILE-NAME-HERE>.ts` with the file you want to watch._
 
-#### NPM `watch` script:
+#### NPM `watch` script
 
 ```json
 {
-    "watch": "npx nodemon --config node_modules/@nyce/config/nodemon.json src/<YOUR-FILE-NAME-HERE>.ts"
+    "watch": "nodemon --config node_modules/@nyce/config/nodemon.json src/<YOUR-FILE-NAME-HERE>.ts"
 }
 ```
 
-_Make sure to replace `<YOUR-FILE-NAME-HERE>.ts` with the file you want to watch._
+The config runs `pnpm format && pnpm lint & pnpm build && pnpm start` on every change, so your project needs those four scripts (replace `pnpm` with `npm` by shipping your own nodemon config if you're not on pnpm).
